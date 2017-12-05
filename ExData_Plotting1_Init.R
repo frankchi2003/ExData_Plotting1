@@ -1,0 +1,24 @@
+ExData_Plotting1_Init <- function() {
+    
+    ## download/unzip the dataset for the project
+    ## project files are stored on local "data" folder
+    datadir <- "data"
+    destfile<- paste(datadir, "household_power_consumption.zip", sep="/")
+    datafile<- paste(datadir, "household_power_consumption.txt", sep="/")
+    
+    if (!file.exists(datadir)) {
+        dir.create(datadir)
+    }
+    
+    ## download the file if it doesn't exist
+    if (!file.exists(destfile)) {
+        fileUrl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
+        download.file(fileUrl, destfile=destfile, mode="wb")
+        ## unzip the project files
+        unzip(destfile, exdir=datadir)
+    }
+    ## read data
+    pwrdata <- read.table(datafile, stringsAsFactors = FALSE, header = TRUE, sep =";"  )
+    
+    return(pwrdata)
+}
